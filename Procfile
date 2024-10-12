@@ -1,1 +1,1 @@
-worker: python3 -m IMGURLL
+worker: python3 -m IMGURL
