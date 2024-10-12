@@ -1,10 +1,10 @@
 services:
   - type: web
     plan: free
-    name: Silots
+    name: IMGURL
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: python3 -m Bot
+    startCommand: python3 -m module
     repo: https://github.com/Akshadgod/IMGURL.git
     branch: main
     envVars:
