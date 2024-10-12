@@ -28,7 +28,7 @@ def get_image_url(image_path):
             print(f"Error uploading image: {e}")
             return None
 
-@app.on_message(filters.incoming & filters.photo)
+@app.on_message(filters.photo)
 async def url_reply(client: Client, message):
     start_time = time.time()
     text = await message.reply("```Please wait, your image is being downloaded...```")
@@ -36,22 +36,22 @@ async def url_reply(client: Client, message):
     
     if photo_path:
         image_url = await client.loop.run_in_executor(None, get_image_url, photo_path)  # Asynchronous handling
-        await text.edit("```Your image is being uploaded...```")
+        x = await text.edit("```Your image is being uploaded...```")
         
         if image_url:
-            await text.delete()
+            await x.delete()
             end_time = time.time()
             elapsed_time = (end_time - start_time) * 1000  # Convert to milliseconds
             await message.reply(f"> Here is your image URL:\n\n"
                                 f"Time taken: {elapsed_time:.2f} milliseconds\n"
                                 f"{image_url}")
         else:
-            await text.delete()
+            await x.delete()
             await message.reply("Failed to upload the image to ImgBB.")
         
         if os.path.exists(photo_path):
             os.remove(photo_path)
     else:
-        await text.delete()
+        await x.delete()
         await message.reply("Failed to download the photo.")
                   
