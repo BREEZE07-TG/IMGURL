@@ -5,7 +5,7 @@ services:
     env: python
     buildCommand: pip install -r requirements.txt
     startCommand: python3 -m Bot
-    repo: https://github.com/Akshadgod/DemonSlayerGameBot.git
+    repo: https://github.com/Akshadgod/IMGURL.git
     branch: main
     envVars:
       - key: BOT_TOKEN 
