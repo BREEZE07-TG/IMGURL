@@ -30,7 +30,7 @@ def get_image_url(image_path):
 @app.on_message(filters.photo)
 async def url_reply(client: Client, message):
   start_time = time.time()
-  text = await message.reply("Uploading your image...") # Initial message
+  text = await message.reply("Uploading your image...")
   photo_path = await client.download_media(message.photo.file_id)
 
   if photo_path:
@@ -38,7 +38,7 @@ async def url_reply(client: Client, message):
     
     if image_url:
       end_time = time.time() # Calculate end time after upload
-      elapsed_time = (end_time - start_time) * 1000 # Convert to milliseconds
+      elapsed_time = (end_time - start_time)
       await text.edit("Your image is uploaded! Here's the URL:\n\n"
                 f"Time taken: {elapsed_time:.2f} milliseconds\n"
                 f"{image_url}")
