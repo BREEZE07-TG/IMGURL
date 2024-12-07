@@ -39,7 +39,8 @@ async def url_reply(client: Client, message):
     if image_url:
       end_time = time.time() # Calculate end time after upload
       elapsed_time = (end_time - start_time)
-      await text.edit("Your image is uploaded! Here's the URL:\n\n"
+      z = < a href = "image_url" >:</a>
+      await text.edit("Your image is uploaded! Here's the URL{z}\n\n"
                 f"Time taken: {elapsed_time:.2f} milliseconds\n"
                 f"{image_url}")
     else:
