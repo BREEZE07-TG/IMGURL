@@ -1,69 +1,57 @@
 import os
-import requests
 import time
+import requests
 from pyrogram import Client, filters
 from IMGURL import app
 
-# Replace with your Vimeo Access Token
-VIMEO_ACCESS_TOKEN = "153f42d592927f5e6026467978da72fb"
+# Correct Catbox API URL
+CATBOX_API_URL = "https://catbox.moe/upload.php"
 
-# Function to upload video to Vimeo
-def upload_video_to_vimeo(video_path):
+# Function to upload GIF to Catbox
+def upload_gif_to_catbox(gif_path):
     """
-    Uploads a video to Vimeo and returns the video link.
-    
-    Args:
-        video_path (str): Path to the video file.
-    
-    Returns:
-        str: Vimeo video link if successful, None otherwise.
+    Uploads the GIF to Catbox and returns the file URL.
     """
-    url = "https://api.vimeo.com/me/videos"
-    headers = {
-        "Authorization": f"Bearer {VIMEO_ACCESS_TOKEN}"
-    }
-    files = {
-        "file_data": open(video_path, "rb")
-    }
-    try:
-        response = requests.post(url, headers=headers, files=files)
-        response_data = response.json()
-        if response.status_code == 200 and "link" in response_data:
-            return response_data["link"]
-        else:
-            print(f"Error from Vimeo: {response_data}")
+    with open(gif_path, "rb") as file:
+        try:
+            files = {"fileToUpload": file}
+            response = requests.post(CATBOX_API_URL, files=files)
+            response_data = response.json()
+            
+            if response_data["success"]:
+                return response_data["url"]
+            else:
+                print(f"Error from Catbox: {response_data}")
+                return None
+        except Exception as e:
+            print(f"Error uploading GIF to Catbox: {e}")
             return None
-    except Exception as e:
-        print(f"Error uploading video to Vimeo: {e}")
-        return None
-    finally:
-        files["file_data"].close()
 
-# Pyrogram video handler
-@app.on_message(filters.incoming & filters.video)
-async def handle_video_upload(client, message):
+# Pyrogram bot
+@app.on_message(filters.video & filters.animation )
+async def handle_gif_upload(client, message):
     start_time = time.time()
-    reply = await message.reply("`Downloading video...`")
+    reply = await message.reply("`Downloading GIF...`")
     
-    # Download the video
-    video_path = await client.download_media(message.video.file_id)
-    if video_path:
-        await reply.edit("`Uploading video to Vimeo...`")
+    # Download the GIF
+    gif_path = await client.download_media(message.animation.file_id)
+    if gif_path:
+        await reply.edit("`Uploading GIF to Catbox...`")
         
-        # Upload video to Vimeo
-        video_url = await client.loop.run_in_executor(None, upload_video_to_vimeo, video_path)
+        # Upload GIF to Catbox
+        gif_url = await client.loop.run_in_executor(None, upload_gif_to_catbox, gif_path)
         
-        if video_url:
+        if gif_url:
             elapsed_time = (time.time() - start_time) * 1000  # Convert to milliseconds
-            await reply.edit(f"`Video uploaded successfully!`\n\n"
-                             f"**Vimeo URL:** {video_url}\n"
+            await reply.edit(f"`GIF uploaded successfully!`\n\n"
+                             f"**Catbox URL:** {gif_url}\n"
                              f"**Time Taken:** {elapsed_time:.2f} ms")
         else:
-            await reply.edit("`Failed to upload the video to Vimeo.`")
+            await reply.edit("`Failed to upload the GIF to Catbox.`")
         
         # Clean up the downloaded file
-        if os.path.exists(video_path):
-            os.remove(video_path)
+        if os.path.exists(gif_path):
+            os.remove(gif_path)
     else:
-        await reply.edit("`Failed to download the video.`")
-                
+        await reply.edit("`Failed to download the GIF.`")
+        
