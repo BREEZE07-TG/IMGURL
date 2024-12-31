@@ -7,10 +7,10 @@ from pyrogram.enums import ParseMode
 
 parse_mode=ParseMode.HTML
 
-IMGBB_API_KEY = "cBvQ2LtrfHnzt6JKoFEuKmnTp7JMZJdm"
+IMGBB_API_KEY = "e3ab93774ab3b932602fc71aefec552f"
 
 def get_image_url(image_path):
-    url = "https://api.imghippo.com/v1/upload"
+    url = "https://api.imgbb.com/1/upload"
     payload = {
         "key": IMGBB_API_KEY,
     }
