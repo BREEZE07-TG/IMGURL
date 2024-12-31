@@ -4,7 +4,7 @@ import time
 from pyrogram import Client, filters
 
 # Replace with your Vimeo Access Token
-VIMEO_ACCESS_TOKEN = "your_vimeo_access_token"
+VIMEO_ACCESS_TOKEN = "153f42d592927f5e6026467978da72fb"
 
 # Function to upload video to Vimeo
 def upload_video_to_vimeo(video_path):
