@@ -22,7 +22,7 @@ from io import BytesIO
 #app = Client("my_account")
 
 @app.on_message(filters.command("licence"))
-async def licence(_, message):
+def licence(_, message):
     img_url = "https://i.ibb.co/PDTjQWG/photo-2025-01-01-03-45-46-7454788247634313240.jpg"
     response = requests.get(img_url)
     imag = Image.open(BytesIO(response.content))
@@ -33,7 +33,7 @@ async def licence(_, message):
     draw.text(points, string, "white", font=font1)
     imag.save("someone.jpg")
 
-    await message.reply_photo("someone.jpg")
+    message.reply_photo("someone.jpg")
 
     # Remove the temporary image file
     os.remove("someone.jpg")
