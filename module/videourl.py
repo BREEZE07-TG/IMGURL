@@ -3,7 +3,7 @@ from pyrogram import Client, filters
 from IMGURL import app
 from PIL import Image, ImageDraw, ImageFont
 from io import BytesIO
-
+import os 
 @app.on_message(filters.command("licence"))
 async def licence(_, message):
     img_url = "https://i.ibb.co/PDTjQWG/photo-2025-01-01-03-45-46-7454788247634313240.jpg"
