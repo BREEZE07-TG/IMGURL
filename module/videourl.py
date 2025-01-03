@@ -28,7 +28,7 @@ async def licence(_, message):
     imag = Image.open(BytesIO(response.content))
     draw = ImageDraw.Draw(imag)
     points = (68, 51)
-    font1 = ImageFont.truetype("IMGURL/module/Fonts/Hey Comic.ttf", 40)
+    font1 = ImageFont.truetype("/IMGURL/module/Fonts/Hey Comic.ttf", 40)
     string = "DEMON SLAYER GAME BOT"
     draw.text(points, string, "white", font=font1)
     imag.save("someone.jpg")
