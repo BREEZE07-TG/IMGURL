@@ -43,7 +43,7 @@ async def url_reply(client: Client, message):
             end_time = time.time()
             elapsed_time = (end_time - start_time)
             z = f'<a href="{image_url}">:</a>'
-            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\n`{image_url}`", parse_mode)
+            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\n ` {image_url} ` ", parse_mode)
         else:
             await text.edit("Failed to upload the image to ImgBB.")
 
