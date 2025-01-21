@@ -1,7 +1,7 @@
 from IMGURL import app
 from pyrogram import Client, filters
 import os
-import aiohttp  # Use aiohttp for async HTTP requests
+import aiohttp 
 from pyrogram.enums import ParseMode
 import time
 
