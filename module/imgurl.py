@@ -40,7 +40,7 @@ async def url_reply(client: Client, message):
         image_url = await client.loop.run_in_executor(None, get_image_url, photo_path)
 
         if image_url:
-            imgurl = image_url
+            imgurl = image_url[:50]+".jpg"
             end_time = time.time()
             elapsed_time = (end_time - start_time)
             z = f'<a href="{imgurl}">:</a>'
