@@ -30,11 +30,34 @@ def get_image_url(image_path):
             print(f"Error uploading image: {e}")
             return None
 
-@app.on_message(filters.photo)
+@app.on_message(filters.photo & filters.private)
 async def url_reply(client: Client, message):
     start_time = time.time()
     text = await message.reply("Uploading your image...")
     photo_path = await client.download_media(message.photo.file_id)
+
+    if photo_path:
+        image_url = await client.loop.run_in_executor(None, get_image_url, photo_path)
+
+        if image_url:
+            imgurl = image_url[:50]+".jpg"
+            end_time = time.time()
+            elapsed_time = (end_time - start_time)
+            z = f'<a href="{imgurl}">:</a>'
+            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\nLink: <code>{imgurl}</code> ", parse_mode)
+        else:
+            await text.edit("Failed to upload the image to ImgBB.")
+
+        if os.path.exists(photo_path):
+            os.remove(photo_path)
+    else:
+        await text.edit("Failed to download the photo.")
+        
+@app.on_message(filters.command("url")&filters.reply)
+async def url(client: Client, message):
+    start_time = time.time()
+    text = await message.reply("Uploading your image...")
+    photo_path = await client.download_media(message.reply_to_photo.id)
 
     if photo_path:
         image_url = await client.loop.run_in_executor(None, get_image_url, photo_path)
