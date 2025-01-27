@@ -57,7 +57,7 @@ async def url_reply(client: Client, message):
 async def url(client: Client, message):
     start_time = time.time()
     text = await message.reply("Uploading your image...")
-    photo_path = await client.download_media(message.reply_to_photo.id)
+    photo_path = await client.download_media(message.reply_to_message.photo.file_id)
 
     if photo_path:
         image_url = await client.loop.run_in_executor(None, get_image_url, photo_path)
