@@ -11,7 +11,7 @@ async def start_handler(client, message):
                 "<pre>Currently, this bot can provide any photo URL under 50MB.\n"
                 "I hope many features will be added soon!\n"
                 "Please send me any photo to continue.</pre>",
-        reply_to_message_id=message.message_id
+        reply_to_message_id=message.id
     )
     
   
