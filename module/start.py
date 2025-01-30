@@ -8,5 +8,5 @@ async def start_handler(client,message):
                                        caption = "**--This is an advanced image to url genrater bot--**\n\n"
                                        ">What can this bot do:\n"
                                        "<pre>Currently this bot can provide any photo url under 50mb\nI hope many features would be added soon! \nplease send me any photo to continue</pre>",
-                                       reply_to_message_id= message.chat.id)       
+                                       reply_to_message_id= message.message.id)       
 
