@@ -44,7 +44,7 @@ async def url_reply(client: Client, message):
             end_time = time.time()
             elapsed_time = (end_time - start_time)
             z = f'<a href="{imgurl}">:</a>'
-            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\nLink: <code>{imgurl}</code> ", parse_mode)
+            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\nLink: <code>{imgurl}</code> ",show_above_text=True)
         else:
             await text.edit("Failed to upload the image to ImgBB.")
 
@@ -67,7 +67,7 @@ async def url(client: Client, message):
             end_time = time.time()
             elapsed_time = (end_time - start_time)
             z = f'<a href="{imgurl}">:</a>'
-            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\nLink: <code>{imgurl}</code> ", parse_mode)
+            await text.edit(f"Your image is uploaded! Here's the URL{z}\n\nTime taken: {elapsed_time:.3f} milliseconds\nLink: <code>{imgurl}</code> ", show_above_text=True)
         else:
             await text.edit("Failed to upload the image to ImgBB.")
 
