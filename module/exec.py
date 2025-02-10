@@ -21,7 +21,7 @@ async def aexec(code: str, app: Client, msg: Message):
 @app.on_message(filters.command("exec"))
 async def runPyro_Funcs(app: Client, msg: Message):
     if msg.from_user.id not in owner:
-        await message.reply("Sorry you are not authorised to use this command")
+        await msg.reply("Sorry you are not authorised to use this command")
         return
 
     code_parts = msg.text.split(None, 1)
