@@ -8,9 +8,10 @@ async def start_handler(client, message):
         photo="https://i.ibb.co/nMSHkfJ/photo-2024-10-03-17-58-50.jpg",
         caption="**--This is an advanced image to URL generator bot--**\n\n"
                 "> What can this bot do:\n"
-                "<pre>Currently, this bot can provide any photo URL under 50MB.\n"
-                "I hope many features will be added soon!\n"
-                "Please send me any photo to continue.</pre>",
+                "<pre>Supports multi media Url\n"
+                "Usage: \n"
+                "In group use /url & in pvt directly send that media\n</pre>",
+                
         reply_to_message_id=message.id
     )
     
