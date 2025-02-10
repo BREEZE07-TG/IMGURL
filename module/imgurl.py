@@ -9,77 +9,88 @@ parse_mode = ParseMode.HTML
 
 CATBOX_API_URL = "https://catbox.moe/user/api.php"
 
-def upload_to_catbox(image_path):
-    """Uploads an image to Catbox.moe and returns the URL."""
-    with open(image_path, "rb") as file:
+def upload_to_catbox(file_path):
+    
+    with open(file_path, "rb") as file:
         files = {"fileToUpload": (file.name, file)}
-        data = {"reqtype": "fileupload", "userhash": ""}  # Empty userhash for anonymous uploads
+        data = {"reqtype": "fileupload", "userhash": ""} 
         
         try:
             response = requests.post(CATBOX_API_URL, data=data, files=files)
             if response.status_code == 200:
-                return response.text.strip()  # Catbox directly returns the image URL
+                return response.text.strip()  
             else:
                 print(f"Error from Catbox: {response.text}")
                 return None
         except Exception as e:
-            print(f"Error uploading image: {e}")
+            print(f"Error uploading file: {e}")
             return None
 
-@app.on_message(filters.photo & filters.private)
-async def url_reply(client: Client, message):
-    """Handles photo messages and uploads the image to Catbox."""
+@app.on_message(filters.private & filters.media)
+async def media_reply(client: Client, message):
+   
     start_time = time.time()
-    text = await message.reply("Uploading your image...")
-    photo_path = await client.download_media(message.photo.file_id)
+    text = await message.reply("Uploading your media...")
 
-    if photo_path:
-        image_url = await client.loop.run_in_executor(None, upload_to_catbox, photo_path)
+    media = message.document or message.photo or message.video or message.audio or message.animation
+    if not media:
+        await text.edit("Unsupported media type.")
+        return
 
-        if image_url:
+    file_path = await client.download_media(media.file_id)
+
+    if file_path:
+        file_url = await client.loop.run_in_executor(None, upload_to_catbox, file_path)
+
+        if file_url:
             end_time = time.time()
             elapsed_time = end_time - start_time
             await text.edit(
-                f"Your image has been uploaded!\n\n"
-                f"<a href='{image_url}'>View Image</a>\n"
+                f"Your media has been uploaded!\n\n"
+                f"<a href='{file_url}'>View File</a>\n"
                 f"Time taken: {elapsed_time:.3f} seconds\n"
-                f"Direct Link: <code>{image_url}</code>",show_above_text = True
+                f"Direct Link: <code>{file_url}</code>",show_above_text = True
             )
         else:
-            await text.edit("Failed to upload the image to Catbox.")
+            await text.edit("Failed to upload the media to Catbox.")
 
-        if os.path.exists(photo_path):
-            os.remove(photo_path)
+        os.remove(file_path) if os.path.exists(file_path) else None
     else:
-        await text.edit("Failed to download the photo.")
+        await text.edit("Failed to download the media.")
 
 @app.on_message(filters.command("url") & filters.reply)
 async def url(client: Client, message):
-    """Handles /url command and uploads the replied image to Catbox."""
-    if not message.reply_to_message or not message.reply_to_message.photo:
-        await message.reply("Please reply to an image.")
+   
+    if not message.reply_to_message:
+        await message.reply("Reply to a media file.")
         return
 
     start_time = time.time()
-    text = await message.reply("Uploading your image...")
-    photo_path = await client.download_media(message.reply_to_message.photo.file_id)
+    text = await message.reply("Uploading your media...")
 
-    if photo_path:
-        image_url = await client.loop.run_in_executor(None, upload_to_catbox, photo_path)
+    media = message.reply_to_message.document or message.reply_to_message.photo or message.reply_to_message.video or message.reply_to_message.audio or message.reply_to_message.animation
+    if not media:
+        await text.edit("Unsupported media type.")
+        return
 
-        if image_url:
+    file_path = await client.download_media(media.file_id)
+
+    if file_path:
+        file_url = await client.loop.run_in_executor(None, upload_to_catbox, file_path)
+
+        if file_url:
             end_time = time.time()
             elapsed_time = end_time - start_time
             await text.edit(
-                f"Your image has been uploaded! \n\n"
-                f"<a href='{image_url}'>View Image</a>\n"
+                f"Your media has been uploaded!\n\n"
+                f"<a href='{file_url}'>View File</a>\n"
                 f"Time taken: {elapsed_time:.3f} seconds\n"
-                f"Direct Link: <code>{image_url}</code>",show_above_text = True
-            )
+                f"Direct Link: <code>{file_url}</code>", show_above_text = True
+            ) 
         else:
-            await text.edit("Failed to upload the image to Catbox.")
+            await text.edit("Failed to upload the media to Catbox.")
 
-        if os.path.exists(photo_path):
-            os.remove(photo_path)
+        os.remove(file_path) if os.path.exists(file_path) else None
     else:
-        await text.edit("Failed to download the photo.")
+        await text.edit("Failed to download the media.")
+    
