@@ -1,8 +1,7 @@
 from pyrogram import Client , filters
 import logging
 import config as c
-from pyrogram.enums import ParseMode
-import requests
+
 FORMAT = "[IMGURL]: %(message)s"
 
 logging.basicConfig(level=logging.INFO, handlers=[logging.FileHandler('logs.txt'),
