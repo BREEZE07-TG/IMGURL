@@ -11,5 +11,6 @@ app = Client(
     "IMGURL", 
     api_id=c.api_id, 
     api_hash=c.api_hash,
-    bot_token=c.bot_token
+    bot_token=c.bot_token,
+    plugins=dict(root='module')
 )
