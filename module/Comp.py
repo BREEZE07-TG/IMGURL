@@ -1,12 +1,9 @@
 from pyrogram import Client, filters
 import ffmpeg
 import os
-from queue import Queue
 import asyncio
 from IMGURL import app
 
-
-queue = Queue()
 
 def progress(current, total, message, type):
     if type == "download":
@@ -19,7 +16,7 @@ def progress(current, total, message, type):
 
 async def process_queue():
     while True:
-        message = queue.get()
+      
         try:
             if message.reply_to_message.video:
                 video_file = await message.reply_to_message.download(progress=progress, progress_args=("download", message))
@@ -40,14 +37,11 @@ async def process_queue():
             os.remove(output_file)
         except Exception as e:
             await message.reply(f"Error: {e}")
-        finally:
-            queue.task_done()
+     
 
 
 
 @app.on_message(filters.command("compress"))
 async def compress_video(client, message):
-    queue.put(message)
-  
     await message.reply("Added to queue. Please wait...")
     await process_queue()
