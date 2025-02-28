@@ -4,4 +4,5 @@ requests
 pillow
 pyrotgfork[fast]
 openai==0.27.0
-ffmpeg
+ffmpeg-python
+
