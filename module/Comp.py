@@ -68,5 +68,6 @@ thread.start()
 @app.on_message(filters.command("compress"))
 async def compress_video(client, message):
     queue.put(message)
+    await process_queue()
     await message.reply("Added to queue. Please wait...")
 
