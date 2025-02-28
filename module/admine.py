@@ -3,6 +3,7 @@ from pyrogram import filters
 import subprocess
 import os
 import asyncio
+import sys
 
 @app.on_message(filters.command('logs'))
 async def logs(client,message):
