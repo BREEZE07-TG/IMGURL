@@ -15,7 +15,7 @@ def progress(current, total, message, type):
         text = f"Uploading {current * 100 / total:.2f}%"
     app.edit_message_text(message.chat.id, message.id, text)
 
-def process_queue():
+async def process_queue():
     while True:
         message = queue.get()
         try:
