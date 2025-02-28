@@ -22,9 +22,9 @@ async def process_video(message):
             return
 
         output_file = f"{os.path.splitext(video_file)[0]}_compressed.mp4"
-        stream = ffmpeg.input(video_file)
-        stream = ffmpeg.output(stream, output_file, vcodec="libx264", pix_fmt="yuv420p", crf=30, preset="veryfast", s="856x480", acodec="aac", ab="50k", scodec="copy")
-        ffmpeg.run(stream)
+        
+        
+        ffmpeg.input(video_file).output(output_file, vcodec="libx264", pix_fmt="yuv420p", crf=30, preset="veryfast", s="856x480", acodec="aac", ab="50k", scodec="copy").run()
 
         await message.reply_video(output_file, progress=progress, progress_args=(message, "Uploading"))
 
