@@ -1,8 +1,7 @@
 tgcrypto
-kurigram
+https://github.com/KurimuzonAkuma/pyrogram/archive/v2.1.18.zip
 requests 
 pillow
 pyrotgfork[fast]
-openai==0.27.0
 ffmpeg-python
 
