@@ -8,8 +8,7 @@ from module import exec as e
 
 @app.on_message(filters.command('logs'))
 async def logs(client,message):
-  if message.from_user.id != e.owner:
-    print(e.owner)
+  if message.from_user.id not in e.owner:
     await message.reply("You are not authorised to use this command")
     return 
   L = subprocess.getoutput("tail -n 20 logs.txt")
@@ -17,7 +16,7 @@ async def logs(client,message):
 
 @app.on_message(filters.command('restart'))
 async def restart(client,message):
-  if message.from_user.id != e.owner:
+  if message.from_user.id not in e.owner:
     await message.reply("You are not authorised to use this command")
     return 
   rst_msg= await message.reply("restarting system...")
