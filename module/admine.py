@@ -9,6 +9,7 @@ from module import exec as e
 @app.on_message(filters.command('logs'))
 async def logs(client,message):
   if message.from_user.id != e.owner:
+    print(e.owner)
     await message.reply("You are not authorised to use this command")
     return 
   L = subprocess.getoutput("tail -n 20 logs.txt")
