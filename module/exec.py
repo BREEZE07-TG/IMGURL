@@ -88,7 +88,7 @@ async def bash(client: Client, message: Message):
     OUTPUT = f"**QUERY:**\n__Command:__\n`{cmd}` \n__PID:__\n`{process.pid}`\n\n**stderr:** \n`{e}`\n**Output:**\n{o}"
     
     if len(OUTPUT) > 4095:
-        with io.BytesIO(OUTPUT.encode()) as out_file:
+        with BytesIO(OUTPUT.encode()) as out_file:
             out_file.name = "exec.text"
             await message.reply_document(document=out_file, caption=cmd)
     else:
