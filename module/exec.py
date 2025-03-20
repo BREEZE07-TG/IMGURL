@@ -66,8 +66,8 @@ async def runPyro_Funcs(app: Client, msg: Message):
 
 @app.on_message(filters.command("bash"))
 async def bash(client: Client, message: Message):
-    if msg.from_user.id not in owner:
-        await msg.reply("Sorry you are not authorised to use this command")
+    if message.from_user.id not in owner:
+        await message.reply("Sorry you are not authorised to use this command")
         return
     if len(message.command) < 2:
         return await message.reply("**Usage:** `/bash <command>`")
