@@ -13,11 +13,9 @@ async def start_handler(client, message):
         "Usage: \n"
         "In group: use /url\n"
         "In private: send media directly</pre>\n\n"
-        "➖" * 15 + "\n"
+        f"{"➖" * 15}\n"
         "Click on \"Manual\" for more details\n"
-        "➖" * 15,
+        f"{"➖" * 15}",
         reply_markup=InlineKeyboardMarkup([
-            [InlineKeyboardButton("Manual", url="https://test-oirz.onrender.com")]
-        ]),
-        reply_to_message_id=message.id
+            [InlineKeyboardButton("Manual", url="https://test-oirz.onrender.com")]])
     )
