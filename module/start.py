@@ -1,5 +1,6 @@
 from IMGURL import app
 from pyrogram import Client, filters  
+from pyrogram.types import InlineKeyboardButton , InlineKeyboardMarkup
 
 @app.on_message(filters.command('start'))        
 async def start_handler(client, message):
@@ -10,7 +11,11 @@ async def start_handler(client, message):
                 "> What can this bot do:\n"
                 "<pre>Supports multi media Url\n"
                 "Usage: \n"
-                "In group use /url & in pvt directly send that media\n</pre>",
+                "In group use /url & in pvt directly send that media\n</pre>"\n\n
+                f"{"➖"*15}\n"
+                "Click on \"manual\" for more details"\n
+                "➖"*15,
+                reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton("manual",url="https://test-oirz.onrender.com")]])
                 
         reply_to_message_id=message.id
     )
