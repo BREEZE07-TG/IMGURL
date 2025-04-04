@@ -1,4 +1,4 @@
-from DS import app
+from IMGURL import app
 from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
