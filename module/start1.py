@@ -9,7 +9,7 @@ import re
 
 database = {}
 
-@app.on_message(filters.command("start"))
+@app.on_message(filters.command("x"))
 async def start(client,message):
     user = message.from_user
     if user.id not in sudo:
