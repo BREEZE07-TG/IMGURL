@@ -58,7 +58,7 @@ async def get_name(client, message):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"BOY", callback_data="boy"),
                  InlineKeyboardButton(f"GIRL", callback_data="girl")]
-            ])
+            ]),show_above_text = True
         )
                 
 @app.on_callback_query(filters.regex(r"^(boy|girl)$"))
@@ -72,7 +72,7 @@ async def gender_selection(Client,CallbackQuery):
             await CallbackQuery.edit_message_text(
                 "You have selected your journey as a boy[.](https://files.catbox.moe/3e3mkc.jpg)\n",
                 reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(f"View Stats" , callback_data= "stats"),
-                                                      InlineKeyboardButton(f"BACK" , callback_data= "gen")]])
+                                                      InlineKeyboardButton(f"BACK" , callback_data= "gen")]]),show_above_text = True
             )
         if data == "girl":
             data_state['gender'] = "girl"
@@ -80,7 +80,7 @@ async def gender_selection(Client,CallbackQuery):
             await CallbackQuery.edit_message_text(
                 "You have selected your journey as a girl[.](https://files.catbox.moe/nlc352.jpg)\n",
                 reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton(f"View Stats" , callback_data= "stats"),
-                                                      InlineKeyboardButton(f"BACK" , callback_data= "gen")]])
+                                                      InlineKeyboardButton(f"BACK" , callback_data= "gen")]]),show_above_text = True
             )
 
 @app.on_callback_query(filters.regex(r"gen$"))
@@ -92,7 +92,7 @@ async def ling(client,CallbackQuery):
             reply_markup=InlineKeyboardMarkup([
                 [InlineKeyboardButton(f"BOY", callback_data="boy"),
                  InlineKeyboardButton(f"GIRL", callback_data="girl")]
-            ])
+            ]),show_above_text = True
         )
         
 @app.on_callback_query(filters.regex(r"stats$"))
