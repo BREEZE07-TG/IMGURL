@@ -3,7 +3,6 @@ from pyrogram import filters
 from pyrogram.enums import ChatType
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
-from config import sudo
 import random
 import re
 
@@ -12,8 +11,6 @@ database = {}
 @app.on_message(filters.command("x"))
 async def start(client,message):
     user = message.from_user
-    if user.id not in sudo:
-        return
     chat_type = message.chat.type
     if chat_type != ChatType.PRIVATE:
         await message.reply("This command only works in Private")
