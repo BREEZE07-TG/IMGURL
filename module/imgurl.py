@@ -75,7 +75,7 @@ async def url(client: Client, message):
         await text.edit("Unsupported media type.")
         return
    
-    size = msg.reply_to_media.file_size
+    size = media.file_size
     if size > 200*1024*1024:
         await text.edit("Looks like the media you provided have huge size\nSorry I only supports till 200mb")
         return
