@@ -26,6 +26,7 @@ def upload_to_catbox(file_path):
             print(f"Error uploading file: {e}")
             return None
 
+
 @app.on_message(filters.private & filters.media)
 async def media_reply(client: Client, message):
    
@@ -35,6 +36,10 @@ async def media_reply(client: Client, message):
     media = message.document or message.photo or message.video or message.audio or message.animation
     if not media:
         await text.edit("Unsupported media type.")
+        return
+    size = await client.get_file(media.file_id)
+    if size.file_size > 200:
+        await message.reply("Looks like the media you provided have huge size\nSorry I only supports till 200mb")
         return
 
     file_path = await client.download_media(media.file_id)
@@ -71,6 +76,10 @@ async def url(client: Client, message):
     media = message.reply_to_message.document or message.reply_to_message.photo or message.reply_to_message.video or message.reply_to_message.audio or message.reply_to_message.animation
     if not media:
         await text.edit("Unsupported media type.")
+        return
+    size = await client.get_file(media.file_id)
+    if size.file_size > 200:
+        await message.reply("Looks like the media you provided have huge size\nSorry I only supports till 200mb")
         return
 
     file_path = await client.download_media(media.file_id)
