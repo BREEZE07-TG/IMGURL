@@ -37,8 +37,8 @@ async def media_reply(client: Client, message):
     if not media:
         await text.edit("Unsupported media type.")
         return
-    file =  client.get_file(media.file_id)
-    size = file.file_size
+    
+    size = msg.reply_to_media.file_size
     if size > 200*1024*1024:
         await text.edit("Looks like the media you provided have huge size\nSorry I only supports till 200mb")
         return
@@ -78,8 +78,8 @@ async def url(client: Client, message):
     if not media:
         await text.edit("Unsupported media type.")
         return
-    file =  client.get_file(media.file_id)
-    size = file.file_size
+   
+    size = size = msg.reply_to_media.file_size
     if size > 200*1024*1024:
         await text.edit("Looks like the media you provided have huge size\nSorry I only supports till 200mb")
         return
