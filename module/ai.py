@@ -18,7 +18,7 @@ def output(query):
 
 @app.on_message(filters.command("ai"))
 async def ai(client,message):
-  text = message.text.split[1]
+  text = message.text.split(maxsplit=1)[1]
   response = output(text)
   await message.reply(response)
  
