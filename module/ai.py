@@ -2,6 +2,7 @@ import torch
 from transformers import pipeline as hf_pipeline
 from IMGURL import app
 from pyrogram import filters 
+from huggingface_hub import login
 
 login(token="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")
 def output(query):
