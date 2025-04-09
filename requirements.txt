@@ -5,4 +5,5 @@ pillow
 pyrotgfork[fast]
 torch
 transformers
+huggingface-cli login
 
