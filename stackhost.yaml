@@ -12,6 +12,3 @@ commands:
     - "nano inxi"
   start:
     - "python3 -m IMGURL"
-
-env:
-  - "ENVIRONMENT=production"
