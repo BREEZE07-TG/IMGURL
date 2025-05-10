@@ -1,0 +1,17 @@
+user:
+  name: breeze
+  github: BREEZE07-TG
+
+language: "python"
+python_version: "3.11.1"
+
+commands:
+  build:
+    - "pip install -r requirements.txt"
+  package:
+    - "nano inxi"
+  start:
+    - "python3 -m IMGURL"
+
+env:
+  - "ENVIRONMENT=production"
