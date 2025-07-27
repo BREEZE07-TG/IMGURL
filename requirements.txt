@@ -1,5 +1,2 @@
-
+kurigram
 requests
-pyrotgfork[fast]
-
-
