@@ -54,7 +54,8 @@ async def media_reply(client: Client, message):
                 f"Your media has been uploaded!\n\n"
                 f"<a href='{file_url}'>View File</a>\n"
                 f"Time taken: {elapsed_time:.3f} seconds\n"
-                f"Direct Link: <code>{file_url}</code>"
+                f"Direct Link: <code>{file_url}</code>",
+                show_above_text = True
             )
         else:
             await text.edit("Failed to upload the media to Catbox.")
@@ -95,7 +96,8 @@ async def url(client: Client, message):
                 f"Your media has been uploaded!\n\n"
                 f"<a href='{file_url}'>View File</a>\n"
                 f"Time taken: {elapsed_time:.3f} seconds\n"
-                f"Direct Link: <code>{file_url}</code>"
+                f"Direct Link: <code>{file_url}</code>",
+                show_above_text = True
             ) 
         else:
             await text.edit("Failed to upload the media to Catbox.")
